@@ -1,7 +1,7 @@
+
 import socket
 
-# TARGET_IP = "10.151.253.10"
-TARGET_IP = "localhost"
+TARGET_IP = "10.151.253.43"
 TARGET_PORT = 5006
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
