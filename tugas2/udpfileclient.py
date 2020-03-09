@@ -1,12 +1,12 @@
 import socket
 import os
 
-TARGET_IP = "10.151.253.43"
-TARGET_PORT = 5006
+TARGET_IP = '127.0.0.1'
+TARGET_PORT = 5005
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
-namafile="bart.png"
+namafile='bart.png'
 ukuran = os.stat(namafile).st_size
 
 fp = open('bart.png','rb')
