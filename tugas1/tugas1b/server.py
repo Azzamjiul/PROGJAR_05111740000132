@@ -1,26 +1,23 @@
 import sys
 import socket
 
-# Create a TCP/IP socket
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-
-# Bind the socket to the port
 server_address = ('localhost', 31000)
 print(sys.stderr, 'starting up on %s port %s' % server_address)
 sock.bind(server_address)
 
-# Listen for incoming connections
-sock.listen(1)
+sock.listen(10)
 
 while True:
-    # Wait for a connection
-    print(sys.stderr, 'waiting for a connection hoho')
+    connection, address = sock.accept()
+    print('Connection from', address)
 
-    connection, client_address = sock.accept()
-    print(sys.stderr, 'connection from ', client_address)
+    f = open("null.pdf", 'rb')
+    isi = f.read(1024)
+    while (isi):
+        connection.send(isi)
+        isi = f.read(1024)
+    f.close()
 
-    # send file
-
-
-    # Clean up the connection
+    print('Done Sending')
     connection.close()
