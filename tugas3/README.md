@@ -1,11 +1,11 @@
 # Tugas 2
 
 * Output pada terminal dari menjalankan program Multithreading
-![Capture Udp_simple](Capture/output_program.PNG)
+![Capture Udp_simple](Capture/output_program.png)
 
 * Bukti foto berhasil terdownload
 
-![Capture Udp_simple](Capture/terdownload.PNG)
+![Capture Udp_simple](Capture/terdownload.png)
 
 * Berikut adalah hasil fotonya
 
