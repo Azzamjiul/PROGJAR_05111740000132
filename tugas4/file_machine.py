@@ -34,6 +34,6 @@ class FileMachine:
 
 if __name__ == '__main__':
     pm = FileMachine()
-    # input = 'input.txt'
+    input = 'input.txt'
     result = pm.process('list')
     print(result)
