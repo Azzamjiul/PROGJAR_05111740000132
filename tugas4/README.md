@@ -26,6 +26,8 @@
 ![alt text](capture/1_b_sebelum_download.png)
 #### [3] sesudah menjalankan client download
 ![alt text](capture/1_b_sesudah_download.png)
+#### [4] penampakan hasil download
+![alt text](capture/1_b_penampakan_download.png)
 
 ### c. Melihat List File
 #### [1] sedang menjalankan client list
