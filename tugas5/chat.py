@@ -36,6 +36,11 @@ class Chat:
 				username = self.sessions[sessionid]['username']
 				logging.warning("INBOX: {}" . format(sessionid))
 				return self.get_inbox(username)
+			elif (command=='logout'):
+				sessionid = j[1].strip()
+				username = self.sessions[sessionid]['username']
+				logging.warning("LOGOUT: {}" . format(sessionid))
+				return self.logout_user(sessionid,username)
 			else:
 				return {'status': 'ERROR', 'message': '**Protocol Tidak Benar'}
 		except KeyError:
@@ -92,8 +97,9 @@ class Chat:
 			
 		return {'status': 'OK', 'messages': msgs}
 
-	def logout(self,username):
-		msgs = 'logout'
+	def logout_user(self,sessionid, username):
+		del self.sessions[sessionid]
+		msgs = username + ' logout successfully'
 		return {'status': 'OK', 'messages': msgs}
 
 if __name__=="__main__":
