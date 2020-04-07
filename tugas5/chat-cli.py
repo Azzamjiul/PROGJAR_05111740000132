@@ -26,10 +26,15 @@ class ChatClient:
                 for w in j[2:]:
                    message="{} {}" . format(message,w)
                 return self.sendmessage(usernameto,message)
+            elif (command=='get_user'):
+                username=j[1].strip()
+                return self.get_user(username)
             elif (command=='inbox'):
                 return self.inbox()
             elif (command=='logout'):
                 return self.logout()
+            elif (command=='online'):
+                return self.online()
             else:
                 return "*Maaf, command tidak benar"
         except IndexError:
@@ -41,11 +46,11 @@ class ChatClient:
             receivemsg = ""
             while True:
                 data = self.sock.recv(64)
-                print("diterima dari server",data)
+                # print("diterima dari server",data)
                 if (data):
                     receivemsg = "{}{}" . format(receivemsg,data.decode())  #data harus didecode agar dapat di operasikan dalam bentuk string
                     if receivemsg[-4:]=='\r\n\r\n':
-                        print("end of string")
+                        # print("end of string")
                         return json.loads(receivemsg)
         except:
             self.sock.close()
@@ -71,6 +76,14 @@ class ChatClient:
         else:
             return "Error, {}" . format(result['message'])
 
+    def get_user(self,username):
+        string="get_user {} {} \r\n" . format(username)
+        result = self.sendstring(string)
+        if result['status']=='OK':
+            return result['hasil']
+        else:
+            return "Error, {}" . format(result['message'])
+
     def inbox(self):
         if (self.tokenid==""):
             return "Error, not authorized"
@@ -88,6 +101,17 @@ class ChatClient:
         result = self.sendstring(string)
         if result['status']=='OK':
             self.tokenid=""
+            return result['messages']
+        else:
+            return "Error, {}" . format(result['message'])
+    
+    def online(self):
+        if (self.tokenid==""):
+            return "Error, not authorized"
+        string="online {} \r\n" . format(self.tokenid)
+        result = self.sendstring(string)
+        if result['status']=='OK':
+            # self.tokenid=""
             return result['messages']
         else:
             return "Error, {}" . format(result['message'])

@@ -31,6 +31,10 @@ class Chat:
 				usernamefrom = self.sessions[sessionid]['username']
 				logging.warning("SEND: session {} send message from {} to {}" . format(sessionid, usernamefrom,usernameto))
 				return self.send_message(sessionid,usernamefrom,usernameto,message)
+			if (command=='auth'):
+				username=j[1].strip()
+				logging.warning("GET_USER: username => {} {}" . format(username))
+				return self.get_user(username)
 			elif (command=='inbox'):
 				sessionid = j[1].strip()
 				username = self.sessions[sessionid]['username']
@@ -41,6 +45,11 @@ class Chat:
 				username = self.sessions[sessionid]['username']
 				logging.warning("LOGOUT: {}" . format(sessionid))
 				return self.logout_user(sessionid,username)
+			elif (command=='online'):
+				sessionid = j[1].strip()
+				username = self.sessions[sessionid]['username']
+				logging.warning("online: {}" . format(sessionid))
+				return self.online()
 			else:
 				return {'status': 'ERROR', 'message': '**Protocol Tidak Benar'}
 		except KeyError:
@@ -99,9 +108,23 @@ class Chat:
 
 	def logout_user(self,sessionid, username):
 		del self.sessions[sessionid]
+		print(self.sessions)
 		msgs = username + ' logout successfully'
 		return {'status': 'OK', 'messages': msgs}
 
+	def online(self):
+		# del self.sessions[sessionid]
+		print(self.sessions)
+		tokens = list(self.sessions.keys())
+		online_users = ""
+		for t in tokens:
+			if self.sessions[t]['username'] in online_users:
+				online_users = online_users
+			else:
+				online_users = online_users + self.sessions[t]['username'] + '\n'
+		print(online_users)
+		msgs = 'USER ONLINE:\n' + online_users
+		return {'status': 'OK', 'messages': msgs}
 if __name__=="__main__":
 	j = Chat()
 	sesi = j.proses("auth messi surabaya")
