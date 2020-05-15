@@ -1,5 +1,8 @@
 # Tugas 10 Pemrograman Jaringan
 
+## Laporan
+[Laporan Tugas 10 (pdf)](tugas10.pdf)
+
 ## Menjalankan Service
 
 ### Setelah pull update terbaru
